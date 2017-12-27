@@ -1,8 +1,9 @@
 package terminal
 
 import (
-	"github.com/fatih/color"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 var white = color.New(color.FgWhite)

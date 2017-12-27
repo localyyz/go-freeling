@@ -5,11 +5,10 @@ import (
 	"os"
 	"strings"
 
+	"github.com/advancedlogic/go-freeling/models"
+	"github.com/advancedlogic/go-freeling/wordnet"
 	"github.com/kdar/factorlog"
 	set "gopkg.in/fatih/set.v0"
-
-	"../models"
-	"../wordnet"
 )
 
 var LOG *factorlog.FactorLog
@@ -129,16 +128,16 @@ func NewNLPEngine(options *NLPOptions) *NLPEngine {
 }
 
 func (this *NLPEngine) Workflow(document *models.DocumentEntity, output chan *models.DocumentEntity) {
-	defer func() {
-		if r := recover(); r != nil {
-			err, _ := r.(error)
-			if err != nil {
-				output <- nil //err.Error()
-			} else {
-				output <- nil
-			}
-		}
-	}()
+	//defer func() {
+	//if r := recover(); r != nil {
+	//err, _ := r.(error)
+	//if err != nil {
+	//output <- nil //err.Error()
+	//} else {
+	//output <- nil
+	//}
+	//}
+	//}()
 
 	document.Init()
 	tokens := list.New()

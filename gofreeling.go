@@ -1,9 +1,9 @@
 package main
 
 import (
-	. "./net"
-	. "./terminal"
-	. "./lib"
+	"github.com/advancedlogic/go-freeling/lib"
+	"github.com/advancedlogic/go-freeling/net"
+	"github.com/advancedlogic/go-freeling/terminal"
 )
 
 var logo = `
@@ -17,15 +17,15 @@ var logo = `
 `
 
 func init() {
-	Infof("Go - Freeling - Natural Language Processing for Golang\n")
-	Infof("This is a partial port of Freeling 3.1\n")
+	terminal.Infof("Go - Freeling - Natural Language Processing for Golang\n")
+	terminal.Infof("This is a partial port of Freeling 3.1\n")
 }
 
 func main() {
-	analyzer:= NewAnalyzer()
+	analyzer := lib.NewAnalyzer()
 
 	println(logo)
 
-	httpServer := NewHttpServer(analyzer)
+	httpServer := net.NewHttpServer(analyzer)
 	httpServer.Listen()
 }

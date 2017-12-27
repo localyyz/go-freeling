@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/advancedlogic/go-freeling/lib"
+	"github.com/advancedlogic/go-freeling/models"
+	"github.com/advancedlogic/go-freeling/terminal"
 	"github.com/gorilla/mux"
-
-	. "../lib"
-	"../models"
-	. "../terminal"
 )
 
 type reqBody struct {
@@ -18,10 +17,10 @@ type reqBody struct {
 
 type HttpServer struct {
 	router   *mux.Router
-	analyzer *Analyzer
+	analyzer *lib.Analyzer
 }
 
-func NewHttpServer(analyzer *Analyzer) *HttpServer {
+func NewHttpServer(analyzer *lib.Analyzer) *HttpServer {
 	instance := new(HttpServer)
 	instance.router = mux.NewRouter()
 	instance.analyzer = analyzer
@@ -35,7 +34,7 @@ func (this *HttpServer) Listen() {
 	this.router.HandleFunc("/ping", this.PingHandler)
 
 	port := this.analyzer.Int64("http.port", 9999)
-	Infof("Http Server listening on port %d\n", port)
+	terminal.Infof("Http Server listening on port %d\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%d", port), this.router)
 }
 
@@ -78,6 +77,6 @@ func (this *HttpServer) DocumentHandler(document *models.DocumentEntity, w http.
 }
 
 func (this *HttpServer) PingHandler(w http.ResponseWriter, r *http.Request) {
-	Infoln("pong")
+	terminal.Infoln("pong")
 	w.Write([]byte("pong"))
 }

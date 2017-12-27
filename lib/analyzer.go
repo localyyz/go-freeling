@@ -1,16 +1,16 @@
 package lib
 
 import (
-	. "../engine"
-	"../models"
+	"github.com/advancedlogic/go-freeling/engine"
+	"github.com/advancedlogic/go-freeling/models"
 )
 
 type Analyzer struct {
-	context *Context
+	context *engine.Context
 }
 
 func NewAnalyzer() *Analyzer {
-	context := NewContext("conf/gofreeling.toml")
+	context := engine.NewContext("conf/gofreeling.toml")
 	context.InitNLP()
 	instance := new(Analyzer)
 	instance.context = context

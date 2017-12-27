@@ -5,11 +5,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/advancedlogic/go-freeling/nlp"
+	"github.com/advancedlogic/go-freeling/terminal"
+	"github.com/advancedlogic/go-freeling/wordnet"
 	"github.com/cheggaaa/pb"
-
-	"../nlp"
-	. "../terminal"
-	"../wordnet"
 )
 
 type Engine struct {
@@ -34,7 +33,7 @@ func (e *Engine) InitNLP() {
 	if e.Ready {
 		return
 	}
-	Infoln("Init Natural Language Processing Engine")
+	terminal.Infoln("Init Natural Language Processing Engine")
 	initialized := false
 	count := 80
 	bar := pb.StartNew(count)

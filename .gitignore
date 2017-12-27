@@ -25,3 +25,7 @@ _testmain.go
 
 /data
 /gofreeling
+/vendor
+
+# Mac OSX
+.DS_Store

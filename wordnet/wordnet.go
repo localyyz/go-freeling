@@ -1,13 +1,13 @@
 package wordnet
 
 import (
-	. "../models"
-	. "../terminal"
-	. "github.com/fluhus/gostuff/nlp/wordnet"
+	"github.com/advancedlogic/go-freeling/models"
+	"github.com/advancedlogic/go-freeling/terminal"
+	"github.com/fluhus/gostuff/nlp/wordnet"
 )
 
 type WN struct {
-	wn *WordNet
+	wn *wordnet.WordNet
 }
 
 type partOfSpeech struct {
@@ -48,13 +48,13 @@ func getPOS(p string) (pos *partOfSpeech) {
 }
 
 func NewWordNet() *WN {
-	wn, err := Parse("./data/dict")
+	wn, err := wordnet.Parse("./data/dict")
 
 	instance := new(WN)
 
 	if err != nil {
-		Errorln(err.Error())
-		Outputln("There was an error during parsing WordNet database")
+		terminal.Errorln(err.Error())
+		terminal.Outputln("There was an error during parsing WordNet database")
 	} else {
 		instance.wn = wn
 	}
@@ -63,7 +63,7 @@ func NewWordNet() *WN {
 
 }
 
-func (this *WN) Annotate(word string, pos string) []*Annotation {
+func (this *WN) Annotate(word string, pos string) []*models.Annotation {
 	if this.wn == nil {
 		return nil
 	}
@@ -76,10 +76,10 @@ func (this *WN) Annotate(word string, pos string) []*Annotation {
 
 	result := this.wn.Search(word)[wnPOS.short]
 
-	annotation := []*Annotation{}
+	annotation := []*models.Annotation{}
 
 	for _, synset := range result {
-		annotation = append(annotation, &Annotation{wnPOS.long, synset.Word, synset.Gloss})
+		annotation = append(annotation, &models.Annotation{wnPOS.long, synset.Word, synset.Gloss})
 	}
 
 	return annotation
