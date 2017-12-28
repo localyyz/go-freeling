@@ -6,10 +6,7 @@ type Context struct {
 }
 
 func NewContext(configFile string) *Context {
-	instance := &Context{}
-	config := NewConfiguration(configFile)
-
-	instance.Configuration = config
-	instance.Engine = NewEngine()
-	return instance
+	return &Context{
+		Engine: NewEngine(),
+	}
 }
