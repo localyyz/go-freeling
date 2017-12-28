@@ -76,8 +76,7 @@ func (this *WN) Annotate(word string, pos string) []*models.Annotation {
 
 	result := this.wn.Search(word)[wnPOS.short]
 
-	annotation := []*models.Annotation{}
-
+	var annotation []*models.Annotation
 	for _, synset := range result {
 		annotation = append(annotation, &models.Annotation{wnPOS.long, synset.Word, synset.Gloss})
 	}

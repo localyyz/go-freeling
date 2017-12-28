@@ -28,7 +28,7 @@ const (
 func init() {
 	frmt := `%{Color "red" "ERROR"}%{Color "yellow" "WARN"}%{Color "green" "INFO"}%{Color "cyan" "DEBUG"}%{Color "blue" "TRACE"}[%{Date} %{Time}] [%{SEVERITY}:%{File}:%{Line}] %{Message}%{Color "reset"}`
 	LOG = factorlog.New(os.Stdout, factorlog.NewStdFormatter(frmt))
-	LOG.SetMinMaxSeverity(factorlog.PANIC, factorlog.TRACE)
+	LOG.SetMinMaxSeverity(factorlog.TRACE, factorlog.PANIC)
 }
 
 type NLPOptions struct {
@@ -202,7 +202,8 @@ func (this *NLPEngine) Workflow(document *models.DocumentEntity, output chan *mo
 			lemma := a.getLemma()
 			pos := a.getTag()
 			props := a.getProb()
-			annotation := this.WordNet.Annotate(base, pos)
+			// annotate using "lemma"
+			annotation := this.WordNet.Annotate(lemma, pos)
 
 			te := models.NewTokenEntity(base, lemma, pos, props, annotation)
 			if pos == TAG_NP {

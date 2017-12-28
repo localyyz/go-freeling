@@ -2,10 +2,11 @@ package nlp
 
 import (
 	"container/list"
-	set "gopkg.in/fatih/set.v0"
 	"io/ioutil"
 	"strconv"
 	"strings"
+
+	set "gopkg.in/fatih/set.v0"
 )
 
 const (
@@ -463,21 +464,26 @@ func (this *Locutions) matching(se *Sentence, i *list.Element) bool {
 }
 
 func (this *Locutions) analyze(se *Sentence) {
-	var i *list.Element
 	found := false
 
-	for i = se.Front(); i != nil; i = i.Next() {
-		if !i.Value.(*Word).isLocked() {
-			if this.matching(se, i) {
-				found = true
-				for i.Value.(*Word).expired {
-					i = i.Next()
-				}
-			}
-		} else {
-			LOG.Trace("Word '" + i.Value.(*Word).getForm() + "' is locked. Skipped.")
+	i := se.Front()
+	for !found && i != nil {
+		w := i.Value.(*Word)
+
+		if w.isLocked() {
+			LOG.Trace("Word '" + w.getForm() + "' is locked. Skipped.")
+			i = i.Next()
+			continue
 		}
+
+		if !this.matching(se, i) {
+			i = i.Next()
+			continue
+		}
+
+		found = true
 	}
+
 	if found {
 		se.rebuildWordIndex()
 	}
