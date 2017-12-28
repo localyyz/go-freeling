@@ -31,25 +31,6 @@ go build gofreeling.go
 ./gofreeling
 </pre>
 
-(http server listens on default port 9999 - port can be changed in conf/gofreeling.toml file)
-
-To process a page:
-
-HTTP GET: *http://localhost:9999/analyzer?url=COPY HERE AN URL*
-
-or **Use as API endpoint:**
-<pre>
-HTTP POST:
-
-http://localhost:9999/analyzer-api
-
-{
-    content: 'Text you want to analyze'
-}
-</pre>
-
-*Response is a self-explaining json*
-
 **Usage as package:**
 (*example*)
 <pre>
