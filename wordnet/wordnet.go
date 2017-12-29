@@ -1,8 +1,9 @@
 package wordnet
 
 import (
+	"log"
+
 	"github.com/advancedlogic/go-freeling/models"
-	"github.com/advancedlogic/go-freeling/terminal"
 	"github.com/fluhus/gostuff/nlp/wordnet"
 )
 
@@ -49,18 +50,15 @@ func getPOS(p string) (pos *partOfSpeech) {
 
 func NewWordNet() *WN {
 	wn, err := wordnet.Parse("/data/dict")
-
 	instance := new(WN)
 
 	if err != nil {
-		terminal.Errorln(err.Error())
-		terminal.Outputln("There was an error during parsing WordNet database")
-	} else {
-		instance.wn = wn
+		log.Printf("There was an error during parsing WordNet database: %+v", err)
+		return nil
 	}
 
+	instance.wn = wn
 	return instance
-
 }
 
 func (this *WN) Annotate(word string, pos string) []*models.Annotation {

@@ -2,11 +2,11 @@ package engine
 
 import (
 	"fmt"
+	"log"
 	"sync"
 	"time"
 
 	"github.com/advancedlogic/go-freeling/nlp"
-	"github.com/advancedlogic/go-freeling/terminal"
 	"github.com/advancedlogic/go-freeling/wordnet"
 	"github.com/cheggaaa/pb"
 )
@@ -33,7 +33,7 @@ func (e *Engine) InitNLP() {
 	if e.Ready {
 		return
 	}
-	terminal.Infoln("Init Natural Language Processing Engine")
+	log.Println("Init Natural Language Processing Engine")
 	initialized := false
 	count := 80
 	bar := pb.StartNew(count)

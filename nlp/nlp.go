@@ -128,34 +128,10 @@ func NewNLPEngine(options *NLPOptions) *NLPEngine {
 }
 
 func (this *NLPEngine) Workflow(document *models.DocumentEntity, output chan *models.DocumentEntity) {
-	//defer func() {
-	//if r := recover(); r != nil {
-	//err, _ := r.(error)
-	//if err != nil {
-	//output <- nil //err.Error()
-	//} else {
-	//output <- nil
-	//}
-	//}
-	//}()
-
 	document.Init()
 	tokens := list.New()
-	url := document.Url
-	content := document.Content
-
-	if url != "" && content == "" {
-		crawler := NewDefaultCrawler()
-		article := crawler.Analyze(url)
-		document.Title = article.Title
-		document.Description = article.MetaDescription
-		document.Keywords = article.MetaKeywords
-		document.TopImage = article.TopImage
-		document.Content = article.CleanedText
-	}
 
 	body := StringsAppend(document.Title, document.Description, document.Keywords, document.Content)
-
 	if this.tokenizer != nil {
 		this.tokenizer.Tokenize(body, 0, tokens)
 	}

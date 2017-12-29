@@ -13,7 +13,6 @@ type DocumentEntity struct {
 	id          string
 	timestamp   int64
 	Status      string
-	Url         string `param:"url"`
 	Title       string `param:"title"`
 	Description string `param:"description"`
 	Keywords    string `param:"keywords"`
@@ -53,10 +52,6 @@ func (this *DocumentEntity) ToJSON() interface{} {
 
 	if this.timestamp > 0 {
 		js["timestamp"] = this.timestamp
-	}
-
-	if this.Url != "" {
-		js["url"] = this.Url
 	}
 
 	if this.Title != "" {
@@ -126,7 +121,7 @@ func (this *DocumentEntity) AddUnknownEntity(name string, frequency int64) {
 	this.Unknown[name] = frequency
 }
 func (this *DocumentEntity) String() string {
-	return this.Url
+	return ""
 }
 
 const (
