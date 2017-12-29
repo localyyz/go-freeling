@@ -24,7 +24,7 @@ func NewEngine() *Engine {
 	}
 }
 
-var path = "./"
+var path = "/"
 var lang = "en"
 
 func (e *Engine) InitNLP() {

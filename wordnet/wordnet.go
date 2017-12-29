@@ -48,7 +48,7 @@ func getPOS(p string) (pos *partOfSpeech) {
 }
 
 func NewWordNet() *WN {
-	wn, err := wordnet.Parse("./data/dict")
+	wn, err := wordnet.Parse("/data/dict")
 
 	instance := new(WN)
 
