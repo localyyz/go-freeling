@@ -10,16 +10,12 @@ type Analyzer struct {
 }
 
 func NewAnalyzer() *Analyzer {
-	context := engine.NewContext("conf/gofreeling.toml")
+	context := engine.NewContext()
 	context.InitNLP()
 	instance := new(Analyzer)
 	instance.context = context
 
 	return instance
-}
-
-func (this *Analyzer) Int64(key string, def int64) int64 {
-	return this.context.Int64(key, def)
 }
 
 func (this *Analyzer) AnalyzeText(document *models.DocumentEntity) *models.DocumentEntity {
